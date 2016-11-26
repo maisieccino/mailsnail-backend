@@ -40,7 +40,6 @@ app.use(function* (next) {
                     case 'html': break;
                     default:
                         this.throw(406, 'Not accepted');
-                        break;
                 }
             }
         }
