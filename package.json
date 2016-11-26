@@ -1,0 +1,21 @@
+{
+  "name": "mailsnail-api",
+  "version": "1.0.0",
+  "description": "Mailsnail API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "knex": "^0.12.6",
+    "koa": "^1.2.4",
+    "koa-bodyparser": "^2.3.0",
+    "koa-router": "^5.4.0",
+    "lodash": "^4.17.2",
+    "morgan": "^1.7.0",
+    "objection": "^0.6.2",
+    "pg": "^6.1.0"
+  }
+}
