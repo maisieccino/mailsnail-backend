@@ -29,14 +29,18 @@ app.use(function* (next) {
     try {
         yield next;
         try {
-            // JSONify api calls.
-            if (this.accepts('xml')) {
-                this.body = "<response>" + xml(this.body) + "</response>";
-                console.log(this.body);
-            }
-            else {
-                if (this.path.match(/^\/api/)) {
-                    this.body = JSON.stringify(this.body, '\t', 2);
+            if (this.path.match(/^\/api/)) {
+                switch(this.accepts(['json','xml','html'])) {
+                    case 'json':
+                        this.body = JSON.stringify({response: this.body, status: this.status}, '\t', 2);
+                        break;
+                    case 'xml':
+                        this.body = "<response>" + xml(this.body) + "</response>";
+                        break;
+                    case 'html': break;
+                    default:
+                        this.throw(406, 'Not accepted');
+                        break;
                 }
             }
         }
