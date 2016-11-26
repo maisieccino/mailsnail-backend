@@ -26,11 +26,10 @@ module.exports = function(api) {
                 this.throw(404, "No letterbox found with that serial number");
             }
     
-            const post = yield Post
-                .query()
+            this.body = yield letterbox
+                .$relatedQuery('post')
                 .insert({
                     content: this.request.body.content,
-                    letterbox: letterbox
                 });
             
         }

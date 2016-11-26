@@ -30,11 +30,11 @@ module.exports = function(api) {
         }
     
         console.log(building);
-        return yield building
+        const letterbox = yield building
             .$relatedQuery('letterbox')
             .insert(this.request.body);
 
-
+        this.body = letterbox;
     });
 
     api.use(router.routes());
