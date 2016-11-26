@@ -10,6 +10,8 @@ const morgan = require('morgan');
 const knexConfig = require('./knexfile');
 const Model = require('objection').Model;
 
+const xml = require('xml');
+
 // Initialize knex.
 const knex = Knex(knexConfig.development);
 
@@ -28,8 +30,14 @@ app.use(function* (next) {
         yield next;
         try {
             // JSONify api calls.
-            if (this.path.match(/^\/api/)) {
-                this.body = JSON.stringify(this.body, '\t', 2);
+            if (this.accepts('xml')) {
+                this.body = "<response>" + xml(this.body) + "</response>";
+                console.log(this.body);
+            }
+            else {
+                if (this.path.match(/^\/api/)) {
+                    this.body = JSON.stringify(this.body, '\t', 2);
+                }
             }
         }
         catch (e) {

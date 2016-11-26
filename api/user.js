@@ -11,8 +11,10 @@ module.exports = function(app) {
         prefix: '/api/user'
     });
 
-    router.get('/', function () {
-        this.body = "yolo";
+    router.post('/new', function() {
+        this.req.body.password = User.hashPassword(this.req.body.password);
+        console.log(this.req.body.password);
+        
     });
 
     app.use(router.routes());

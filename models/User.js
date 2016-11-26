@@ -2,6 +2,8 @@
 
 const Model = require('objection').Model;
 
+const bcrypt = require('bcrypt-nodejs');
+
 class User extends Model {
     static get tableName() {
         return "user";
@@ -40,5 +42,9 @@ class User extends Model {
                 }
             }
         };
+    }
+
+    static hashPassword(password) {
+        return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
     }
 }
