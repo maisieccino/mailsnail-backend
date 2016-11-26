@@ -5,4 +5,6 @@ module.exports = function(app) {
     //TODO: include api endpoints.
 
     require('./api/user')(app);
+
+    require('./api/subscriber')(app);
 }
