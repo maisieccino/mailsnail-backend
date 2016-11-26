@@ -30,6 +30,7 @@ app.use(function* (next) {
         yield next;
         try {
             if (this.path.match(/^\/api/)) {
+                console.log(this.body);
                 switch(this.accepts(['json','xml','html'])) {
                     case 'json':
                         this.body = JSON.stringify({response: this.body, status: this.status}, '\t', 2);

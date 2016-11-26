@@ -1,12 +1,12 @@
 
 exports.up = function(knex, Promise) {
     return knex.schema.table('post', function (table) {
-        table.string('img_url');
+        table.bigInteger('letterbox').unsigned().notNullable().references('id').inTable('letterbox');
     });
 };
 
 exports.down = function(knex, Promise) {
     return knex.schema.table('post', function (table) {
-        table.dropColumn('img_url');
+        table.dropColumn('letterbox');
     });
 };

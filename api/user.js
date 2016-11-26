@@ -6,17 +6,21 @@ const Router = require('koa-router');
 
 const User = require('../models/User');
 
-module.exports = function(app) {
+module.exports = function(api) {
     var router = new Router({
-        prefix: '/api/user'
+        prefix: '/user'
     });
 
-    router.post('/new', function() {
-        this.req.body.password = User.hashPassword(this.req.body.password);
-        console.log(this.req.body.password);
+    router.post('/new', function *() {
+        this.request.body.password_digest = User.hashPassword(this.request.body.password);
         
+        const user = yield User
+            .query()
+            .insertAndFetch(this.request.body);
+
+        this.status = 200;
     });
 
-    app.use(router.routes());
-    app.use(router.allowedMethods());
+    api.use(router.routes());
+    api.use(router.allowedMethods());
 }

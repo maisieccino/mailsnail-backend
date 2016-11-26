@@ -1,10 +1,15 @@
 "use strict";
 
 const Model = require('objection').Model;
+const Letterbox = require('./Letterbox');
 
 class Post extends Model {
     static get tableName() {
         return "post";
+    }
+
+    static get idColumn() {
+        return 'id';
     }
 
     static get jsonSchema() {
@@ -17,10 +22,25 @@ class Post extends Model {
             properties: {
                 id: { type: 'integer' },
                 type: { type: 'string' },
-                value: { type: 'string' }
+                value: { type: 'string' },
+                letterbox: { type: 'integer' }
             }
         };
     }
 
+    static get relationMappings() {
+        return {
+            letterbox: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Letterbox,
+                join: {
+                    from: 'post.letterbox',
+                    to: 'letterbox.id'
+                }
+            }
+        };
+    }
 
 }
+
+module.exports = Post;

@@ -48,7 +48,7 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
     var commands = [];
-    for (var t of ['admin_user','org_user','ticket','ticket_tier','event_event_category','event_category','event','venue','organisation','user']) {
+    for (var t of ['post','letterbox_subscriber','subscriber','letterbox','user_building', 'building', 'user']) {
         commands.push(knex.schema.dropTable(t));
     }
 

@@ -48,3 +48,5 @@ class User extends Model {
         return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
     }
 }
+
+module.exports = User;
