@@ -25,5 +25,20 @@ class User extends Model {
         };
     }
 
-
+    static get relationMappings() {
+        return {
+            building: {
+                relation: Model.ManyToManyRelation,
+                modelClass: __dirname + '/Building',
+                join: {
+                    from: 'user.id',
+                    through: {
+                        from: 'user_building.user',
+                        to: 'user_building.building'
+                    },
+                    to: 'building.id'
+                }
+            }
+        };
+    }
 }

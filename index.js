@@ -39,6 +39,8 @@ app.use(function* (next) {
         this.status = e.status || 500;
         this.body = e.message || '{ error: "Internal server error" }';
     }
+
+    console.log (this.method + ' ' + this.path + ' - ' + this.status);
 });
 
 require('./api')(app);

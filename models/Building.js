@@ -2,6 +2,8 @@
 
 const Model = require('objection').Model;
 
+const User = require('./User');
+
 class Building extends Model {
     static get tableName() {
         return "building";
